@@ -72,6 +72,8 @@ img = 0
 canny = 0
 hough = 0
 
+demo = False
+
 def process(image_in, lines_out, interactive):
 	global rho, theta, threshold, maxLineGap, minLineLength, img, thickness, thickness_canny, PI, blurSize, blurSize_min, blurSize_max, canny, hough, lines
 	
@@ -93,22 +95,28 @@ def process(image_in, lines_out, interactive):
 
 
 	img = cv2.imread(image_in)
-	cv2.imwrite("demo1.jpg", img)
+	if demo:
+		cv2.imwrite("demo1.jpg", img)
 	img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-	cv2.imwrite("demo2.jpg", img)
+	if demo:
+		cv2.imwrite("demo2.jpg", img)
 	img = cv2.resize(img,None,fx=.25, fy=.25, interpolation = cv2.INTER_CUBIC)
-	cv2.imwrite("demo3.jpg", img)
+	if demo:
+		cv2.imwrite("demo3.jpg", img)
 
 	img_blur = cv2.GaussianBlur(img,(blurSize,blurSize),0)
-	cv2.imwrite("demo4.jpg", img)
+	if demo:
+		cv2.imwrite("demo4.jpg", img)
 
 	canny = cv2.Canny(img_blur, threshold_canny*.4, threshold_canny, True)
-	cv2.imwrite("demo5.jpg", canny)
+	if demo:
+		cv2.imwrite("demo5.jpg", canny)
 
 	kernel = np.ones((thickness_canny,thickness_canny), np.uint8)
 
 	canny = cv2.dilate(canny, kernel, iterations=1)
-	cv2.imwrite("demo6.jpg", canny)
+	if demo:
+		cv2.imwrite("demo6.jpg", canny)
 
 	lines = cv2.HoughLinesP(canny, rho=rho, theta=theta, threshold = threshold, minLineLength = minLineLength, maxLineGap = maxLineGap)
 
@@ -122,7 +130,8 @@ def process(image_in, lines_out, interactive):
 		cv2.imshow('canny', canny)
 		cv2.waitKey(0)
 		writeParams()
-	cv2.imwrite("demo7.jpg", hough)
+	if demo:
+		cv2.imwrite("demo7.jpg", hough)
 
 	f = open(lines_out, 'w')
 	f.write("BlurSize: %s, CannyThreshold: %s, Rho: %s, Theta: %s, HoughThreshold: %s, MaxLineGap: %s, MinLineLength: %s\n" % (blurSize, threshold_canny, rho, theta, threshold, maxLineGap, minLineLength))
