@@ -17,6 +17,8 @@ xMin = 0
 yMax = 0
 yMin = 0
 
+writeFrames = False
+
 def sort(lines):
 	first = alignLeft(lines[0])
 	lines[0] = first
@@ -127,9 +129,9 @@ def process(joinDistance, lines_in, coords_out, interactive, img_out):
 
 	thickness = 2
 
-	img = np.zeros((yMax,xMax), np.uint8)
+	img = np.zeros((yMax - yMin,xMax - xMin), np.uint8)
 	for line in lines:
-		cv2.line(img, (line[0], line[1]), (line[2], line[3]), (255, 255, 255), thickness)
+		cv2.line(img, (line[0] - xMin, line[1] - yMin), (line[2] - xMin, line[3] - yMin), (255, 255, 255), thickness)
 
 	if interactive:
 		cv2.imshow("Result", img)
@@ -137,7 +139,7 @@ def process(joinDistance, lines_in, coords_out, interactive, img_out):
 
 	lines = sort(lines)
 	lines = connect(lines, joinDistance)
-	img = np.zeros((yMax,xMax), np.uint8)
+	img = np.zeros((yMax - yMin,xMax - xMin), np.uint8)
 	count = 0
 	if os.path.isdir("./frames"):
 		shutil.rmtree("./frames")
@@ -145,13 +147,14 @@ def process(joinDistance, lines_in, coords_out, interactive, img_out):
 
 	f = open(coords_out, 'w')
 	for line in lines:
-		cv2.line(img, (line[0], line[1]), (line[2], line[3]), (255, 255, 255), thickness)
+		cv2.line(img, (line[0] - xMin, line[1] - yMin), (line[2] - xMin, line[3] - yMin), (255, 255, 255), thickness)
 		if interactive:
 			cv2.imshow("Result", img)
 			cv2.waitKey(0)
-		#cv2.imwrite("./frames/frame%s.jpg" % str(count).zfill(4), img)
+		if writeFrames:
+			cv2.imwrite("./frames/frame%s.jpg" % str(count).zfill(4), img)
 		count += 1
-		f.write("1; %s, %s, %s, %s\n" % (x_transform(line[0]), y_transform(line[1]), x_transform(line[2]), y_transform(line[3])))
+		f.write("1; %s, %s, %s, %s\n" % (x_transform(line[0] - xMin), y_transform(line[1] - yMin), x_transform(line[2] - xMin), y_transform(line[3] - yMin)))
 	cv2.imwrite("./%s" % img_out, img)
 	print("Plotted %s lines." % count)
 	cv2.destroyAllWindows()

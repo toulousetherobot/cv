@@ -41,7 +41,7 @@ blurSize = 7
 threshold_canny = 100
 
 blurSize_min = 1
-blurSize_max = 21
+blurSize_max = 41
 
 threshold_canny_min = 10
 threshold_canny_max = 300
@@ -74,6 +74,8 @@ hough = 0
 
 demo = False
 
+downsample = .25
+
 def process(image_in, lines_out, interactive, params):
 	global rho, theta, threshold, maxLineGap, minLineLength, img, thickness, thickness_canny, PI, blurSize, blurSize_min, blurSize_max, canny, hough, lines
 	
@@ -100,7 +102,7 @@ def process(image_in, lines_out, interactive, params):
 	img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	if demo:
 		cv2.imwrite("demo2.jpg", img)
-	img = cv2.resize(img,None,fx=.25, fy=.25, interpolation = cv2.INTER_CUBIC)
+	img = cv2.resize(img,None,fx=downsample, fy=downsample, interpolation = cv2.INTER_CUBIC)
 	if demo:
 		cv2.imwrite("demo3.jpg", img)
 
