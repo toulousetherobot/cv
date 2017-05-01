@@ -7,15 +7,15 @@ if __name__ == "__main__":
 	image_in = 'im1.JPG'
 	lines_out = 'lines'
 	intermediate = 'temp.txt'
-	interactive = True
+	interactive = False
 	if len(sys.argv) > 1:
 		image_in = sys.argv[1]
 	if len(sys.argv) > 2:
 		lines_out = sys.argv[2]
 	if len(sys.argv) > 3:
 		s = sys.argv[3].lower()
-		if s == '0' or s == 'no' or s == 'false':
-			interactive = False
+		if s == '1' or s == 'yes' or s == 'true' or s == 'interactive':
+			interactive = True
 
 	lines_out_text = "%s.crv" % lines_out
 	lines_out_img = "%s.jpg" % lines_out
