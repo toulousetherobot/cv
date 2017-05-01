@@ -8,6 +8,7 @@ if __name__ == "__main__":
 	lines_out = 'lines'
 	intermediate = 'temp.txt'
 	interactive = False
+	params = 'params.txt'
 	if len(sys.argv) > 1:
 		image_in = sys.argv[1]
 	if len(sys.argv) > 2:
@@ -16,10 +17,11 @@ if __name__ == "__main__":
 		s = sys.argv[3].lower()
 		if s == '1' or s == 'yes' or s == 'true' or s == 'interactive':
 			interactive = True
-
+	if len(sys.argv) > 4:
+		params = sys.argv[4]
 	lines_out_text = "%s.crv" % lines_out
 	lines_out_img = "%s.jpg" % lines_out
-	edge.process(image_in, intermediate, interactive)
+	edge.process(image_in, intermediate, interactive, params)
 	joinDistance = 20
 	plot.process(joinDistance, intermediate, lines_out_text, False, lines_out_img)
 

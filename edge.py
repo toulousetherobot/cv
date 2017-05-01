@@ -74,7 +74,7 @@ hough = 0
 
 demo = False
 
-def process(image_in, lines_out, interactive):
+def process(image_in, lines_out, interactive, params):
 	global rho, theta, threshold, maxLineGap, minLineLength, img, thickness, thickness_canny, PI, blurSize, blurSize_min, blurSize_max, canny, hough, lines
 	
 	if interactive:
@@ -90,8 +90,8 @@ def process(image_in, lines_out, interactive):
 		cv2.createTrackbar('minLineLength','main', 0,100,update)
 		cv2.createTrackbar('maxLineGap','main', 0,100,update)
 	else:
-		if os.path.exists('params.txt'):
-			readParams()
+		if os.path.exists(params):
+			readParams(params)
 
 
 	img = cv2.imread(image_in)
@@ -129,7 +129,7 @@ def process(image_in, lines_out, interactive):
 		cv2.imshow('main', hough)
 		cv2.imshow('canny', canny)
 		cv2.waitKey(0)
-		writeParams()
+		writeParams(params)
 	if demo:
 		cv2.imwrite("demo7.jpg", hough)
 
@@ -141,8 +141,8 @@ def process(image_in, lines_out, interactive):
 	f.close()
 	cv2.destroyAllWindows()
 
-def writeParams():
-	f = open('params.txt', 'w')
+def writeParams(params):
+	f = open(params, 'w')
 	f.write("%s\n" % blurSize)
 	f.write("%s\n" % threshold_canny)
 	f.write("%s\n" % rho)
@@ -152,9 +152,9 @@ def writeParams():
 	f.write("%s\n" % minLineLength)
 	f.close()
 
-def readParams():
+def readParams(params):
 	global blurSize, threshold_canny, rho, theta, threshold, maxLineGap, minLineLength
-	f = open('params.txt', 'r')
+	f = open(params, 'r')
 	blurSize = int(f.readline())
 	threshold_canny = int(f.readline())
 	rho = float(f.readline())
