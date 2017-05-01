@@ -1,0 +1,12 @@
+*.jpg
+*.txt
+*.JPG
+*.pyc
+*.crv
+opencv
+opencv_contrib
+*.gif
+*.jpeg
+*.png
+*.tiff
+*.m
