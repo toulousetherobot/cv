@@ -6,8 +6,8 @@ import os, shutil
 y_paper_max = 792
 x_paper_max = 1224
 
-y_paper_bottom = 250
-y_paper_top = 700
+y_paper_bottom = 150
+y_paper_top = 600
 
 x_paper_left = 0
 x_paper_right = 0
