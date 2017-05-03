@@ -74,7 +74,7 @@ hough = 0
 
 demo = False
 
-downsample = .25
+downsample = 1
 
 def process(image_in, lines_out, interactive, params):
 	global rho, theta, threshold, maxLineGap, minLineLength, img, thickness, thickness_canny, PI, blurSize, blurSize_min, blurSize_max, canny, hough, lines
