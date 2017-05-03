@@ -105,7 +105,7 @@ def process(image_in, lines_out, interactive, params):
 	if demo:
 		cv2.imwrite("demo2.jpg", img)
 	img = cv2.resize(img,None,fx=downsample, fy=downsample, interpolation = cv2.INTER_CUBIC)
-	img = img[crop_coords[2]:crop_coords[3], crop_coords[0]: crop_coords[1]]
+	#img = img[crop_coords[2]:crop_coords[3], crop_coords[0]: crop_coords[1]]
 	cv2.imwrite("%s.crop.jpg" % image_in, img)
 	if demo:
 		cv2.imwrite("demo3.jpg", img)
