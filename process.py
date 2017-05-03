@@ -1,3 +1,4 @@
+import os
 import sys
 import edge
 import plot
@@ -24,8 +25,6 @@ if __name__ == "__main__":
 	edge.process(image_in, intermediate, interactive, params)
 	joinDistance = 20
 	plot.process(joinDistance, intermediate, lines_out_text, False, lines_out_img)
-
-
 
 # Top right is origin
 # (positive X, positive Y)
