@@ -160,6 +160,7 @@ def writeParams(params):
 
 def readParams(params):
 	global blurSize, threshold_canny, rho, theta, threshold, maxLineGap, minLineLength
+	print("Reading params.")
 	f = open(params, 'r')
 	blurSize = int(f.readline())
 	threshold_canny = int(f.readline())

@@ -20,6 +20,7 @@ if __name__ == "__main__":
 			interactive = True
 	if len(sys.argv) > 4:
 		params = sys.argv[4]
+	params = '/home/pi/image-processing/cv/params.txt'
 	lines_out_text = "%s" % lines_out
 	lines_out_img = "%s.jpg" % lines_out
 	edge.process(image_in, intermediate, interactive, params)
