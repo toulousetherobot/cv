@@ -146,10 +146,7 @@ def process(joinDistance, lines_in, coords_out, interactive, img_out):
 	os.mkdir("./frames")
 
 	f = open(coords_out, 'w')
-	xm = x_paper_right
-	xM = x_paper_left
-	ym = x_
-	yM = line[0]
+	
 	for line in lines:
 		cv2.line(img, (line[0] - xMin, line[1] - yMin), (line[2] - xMin, line[3] - yMin), (255, 255, 255), thickness)
 		if interactive:
