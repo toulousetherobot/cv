@@ -76,6 +76,8 @@ demo = False
 
 downsample = 1
 
+crop_coords = [1350, 2050, 400, 1300]
+
 def process(image_in, lines_out, interactive, params):
 	global rho, theta, threshold, maxLineGap, minLineLength, img, thickness, thickness_canny, PI, blurSize, blurSize_min, blurSize_max, canny, hough, lines
 	
@@ -103,6 +105,8 @@ def process(image_in, lines_out, interactive, params):
 	if demo:
 		cv2.imwrite("demo2.jpg", img)
 	img = cv2.resize(img,None,fx=downsample, fy=downsample, interpolation = cv2.INTER_CUBIC)
+	img = img[crop_coords[0]:crop_coords[1], crop_coords[2], crop_coords[3]]
+	
 	if demo:
 		cv2.imwrite("demo3.jpg", img)
 
