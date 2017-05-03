@@ -76,7 +76,7 @@ demo = False
 
 downsample = 1
 
-crop_coords = [1350, 2050, 300, 1300]
+crop_coords = [1150, 1850, 100, 1100]
 
 def process(image_in, lines_out, interactive, params):
 	global rho, theta, threshold, maxLineGap, minLineLength, img, thickness, thickness_canny, PI, blurSize, blurSize_min, blurSize_max, canny, hough, lines
