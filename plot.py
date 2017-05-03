@@ -157,7 +157,8 @@ def process(joinDistance, lines_in, coords_out, interactive, img_out):
 		count += 1
 		f.write("1; %s, %s, %s, %s\n" % (x_transform(line[0] - xMin), y_transform(line[1] - yMin), x_transform(line[2] - xMin), y_transform(line[3] - yMin)))
 	cv2.imwrite("%s" % img_out, img)
-	print("Wrote image to %s" % img_out)
+	f.close()
+	print("Wrote coords to %s" % coords_out)
 	print("Plotted %s lines." % count)
 	cv2.destroyAllWindows()
 
